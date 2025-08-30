@@ -1,0 +1,27 @@
+POST http://localhost:3000/clients HTTP/1.1
+Content-Type: application/json
+
+{
+  "name": "Jane Doe",
+  "email": "jane@j.com"
+}
+
+###
+
+POST http://localhost:3000/accounts HTTP/1.1
+Content-Type: application/json
+
+{
+  "client_id": "2a2fc4cf-b11a-41a3-b356-e8b603a79491"
+}
+
+###
+
+POST http://localhost:3000/transactions HTTP/1.1
+Content-Type: application/json
+
+{
+  "account_id_from": "3520713d-7bfc-4427-a568-bc2f40027adc",
+  "account_id_to": "23a1427d-77a7-4509-8bcf-4aa097d95b28",
+  "amount": 50
+}
