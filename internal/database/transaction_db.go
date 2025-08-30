@@ -2,6 +2,7 @@ package database
 
 import (
 	"database/sql"
+	"log"
 
 	"github.com/WagnerReis/fc-ms-wallet/internal/entity"
 )
@@ -24,6 +25,7 @@ func (t *TransactionDB) Create(transaction *entity.Transaction) error {
 	defer stmt.Close()
 	_, err = stmt.Exec(transaction.ID, transaction.AccountFrom.ID, transaction.AccountTo.ID, transaction.Amount, transaction.CreatedAt)
 	if err != nil {
+		log.Fatal(err)
 		return err
 	}
 	return nil
