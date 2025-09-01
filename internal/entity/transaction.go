@@ -34,7 +34,6 @@ func NewTransaction(accountFrom *Account, accountTo *Account, amount float64) (*
 func (t *Transaction) Commit() {
 	t.AccountFrom.Debit(t.Amount)
 	t.AccountTo.Credit(t.Amount)
-
 }
 
 func (t *Transaction) Validate() error {
