@@ -3,6 +3,7 @@ module github.com/WagnerReis/fc-ms-wallet
 go 1.24.6
 
 require (
+	github.com/confluentinc/confluent-kafka-go v1.9.2
 	github.com/go-chi/chi v1.5.5
 	github.com/go-chi/chi/v5 v5.2.3
 	github.com/go-sql-driver/mysql v1.9.3
