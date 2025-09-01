@@ -1,7 +1,7 @@
-FROM golang:1.24-alpine
+FROM golang:1.24
 
 WORKDIR /app/
 
-RUN apk add --no-cache librdkafka-dev
+RUN apt-get update && apt-get install -y librdkafka-dev
 
 CMD ["tail", "-f", "/dev/null"]

@@ -1,6 +1,7 @@
 services:
   goapp:
     build: .
+    platform: linux/amd64
     volumes:
       - .:/app
     ports:
@@ -57,9 +58,10 @@ services:
       CONFLUENT_METRICS_ENABLE: 'false'
 
   control-center:
-    image: confluentinc/cp-enterprise-control-center:7.3.0
+    image: confluentinc/cp-enterprise-control-center:6.1.0
     hostname: control-center
     container_name: control-center
+    user: root
     depends_on:
       - kafka
     ports:
@@ -71,5 +73,8 @@ services:
       CONTROL_CENTER_MONITORING_INTERCEPTOR_TOPIC_PARTITIONS: 1
       CONFLUENT_METRICS_TOPIC_REPLICATION: 1
       PORT: 9021
+    volumes:
+      - control-center-data:/var/lib/confluent-control-center
   
-
+volumes:
+  control-center-data:
