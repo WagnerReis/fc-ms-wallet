@@ -56,16 +56,18 @@ func main() {
 
 	createClientUseCase := create_client.NewCreateClientUseCase(clientDb)
 	createAccountUseCase := create_account.NewCreateAccountUseCase(accountDb, clientDb)
+	addCreditUseCase := create_account.NewAddCreditUseCase(accountDb, clientDb)
 	createTransactionUseCase := create_transaction.NewCreateTransactionUseCase(uow, *eventDispatcher, transactionCreatedEvent, balanceUpdatedEvent)
 
 	webserver := webserver.NewWebServer(":8080")
 
 	clientHandler := web.NewWebClientHandler(*createClientUseCase)
-	accountHandler := web.NewWebAccountHandler(*createAccountUseCase)
+	accountHandler := web.NewWebAccountHandler(*createAccountUseCase, *addCreditUseCase)
 	transactionHandler := web.NewWebTransactionHandler(*createTransactionUseCase)
 
 	webserver.AddHandler("/clients", clientHandler.CreateClient)
 	webserver.AddHandler("/accounts", accountHandler.CreateAccount)
+	webserver.AddHandler("/accounts/credit", accountHandler.AddCredit)
 	webserver.AddHandler("/transactions", transactionHandler.CreateTransaction)
 
 	fmt.Println("Server is running")
